@@ -1,0 +1,62 @@
+<h3 style="background-color: #1a4a72; text-align: center; color: white; padding: 5px">
+Stuff Panel</h3>
+
+<div class="col-md-6 offset-md-3 mt-5">
+    <div class="card">
+        <h4 class="card-header">Room</h4>
+        <div class="card-body">
+            <form [formGroup]="stuffFrom" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="numbers">Room Number</label>
+                    <input type="number" formControlName="numbers" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.numbers.errors }" />
+                    <div *ngIf="submitted && f.numbers.errors" class="invalid-feedback">
+                        <div *ngIf="f.numbers.errors.required">Room number is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="capacity">Capacity of Student</label>
+                    <input type="number" formControlName="capacity" class="form-control" 
+                    [ngClas+s]="{ 'is-invalid': submitted && f.capacity.errors }" />
+                    <div *ngIf="submitted && f.capacity.errors" class="invalid-feedback">
+                        <div *ngIf="f.capacity.errors.required">Capacity is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="building">Building Name or Building Block</label>
+                    <input type="text" formControlName="building" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.building.errors }" />
+                    <div *ngIf="submitted && f.building.errors" class="invalid-feedback">
+                        <div *ngIf="f.building.errors.required">Building name is required</div>
+                    </div>
+                </div>
+               
+
+                <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Add Room
+                </button>
+                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+            </form>
+        </div>
+
+<table border = 1>
+    <td class="font-weight-bold">RoomId</td>
+    <td class="font-weight-bold">Room Number</td>
+    <td class="font-weight-bold">Capacity of Student</td>
+    <td class="font-weight-bold">Building Name or Building Block</td>
+
+
+<tr *ngFor="let value of rooms">
+  
+    <td>{{value.roomId}}</td>
+    <td>{{value.number}}</td>
+    <td>{{value.capacity}}</td>
+    <td>{{value.building}}</td>
+    <td><a>
+     <button class="ml-2 btn btn-primary" (click)="deleteRooms(value.roomId)">
+        Delete
+    </button>
+  </a> <td>
+</tr>
+</table>
